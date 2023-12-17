@@ -4,6 +4,10 @@ from pagecontent import PageContent
 
 
 class Extractor:
+    """
+    Class for processing raw page content and storing in a PageContent instance.
+    """
+
     @staticmethod
     def _extract_content(raw_page: RawPage):
         soup = BeautifulSoup(raw_page.data, "html.parser")
@@ -18,6 +22,13 @@ class Extractor:
 
     @classmethod
     def extract_sentences(cls, raw_page: RawPage, page_content: PageContent):
+        """
+        Extracts sentences from RawPage instance into PageContent instance.
+
+        Args:
+            raw_page (RawPage): The RawPage instance to extract sentences from.
+            page_content (PageContent): The PageContent instance to store the extracted sentences.
+        """
         sentences = []
         sentence = ""
         for word in cls._extract_content(raw_page):
@@ -46,6 +57,13 @@ class Extractor:
 
     @classmethod
     def extract_words(cls, raw_page: RawPage, page_content: PageContent):
+        """
+        Extracts words from RawPage instance into PageContent instance.
+
+        Args:
+            raw_page (RawPage): The RawPage instance to extract words from.
+            page_content (PageContent): The PageContent instance to store the extracted words.
+        """
         words = []
         word = ""
         raw_data = " ".join(cls._extract_content(raw_page))

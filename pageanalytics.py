@@ -4,7 +4,18 @@ import json
 
 
 class PageAnalytics:
+    """
+    Class which provides a PageContent instance analytics.
+    """
+
     def __init__(self, page_content: PageContent):
+        """
+        Initializes a new instance of the PageAnalytics class from PageContent.
+
+        Args:
+            page_content (PageContent): The page content which will be analysed.
+        """
+
         self._page_content = page_content
         self._CONJECTIONS = {
             "and",
@@ -39,6 +50,18 @@ class PageAnalytics:
         return data_counts.head(10)
 
     def make_analytics(self):
+        """
+        Does the analyses which fills self._json with:
+            url: the orl of the page
+            top_10_words: top 10 most frequent words
+            top_10_words_without_conjections: top 10 most frequent words not counting the conjections
+            avarage_word_length: the avarage of the word lengths
+            median_word_length: the median of the word lengths
+            top_10_longest_words: top 10 longest words
+            avarage_sentence_length: the avarage of the sentence lengths
+            median_sentence_length: the median of the sentence lengths
+            max_length_sentence: the longest sentence.
+        """
         report = {}
         report["url"] = self._page_content.url
         words = self._page_content.words
@@ -77,10 +100,22 @@ class PageAnalytics:
         self._json = json.dumps(report, indent=4)
 
     def save_to_json(self, filename: str):
+        """
+        Dumps self._json to a file with a given name.
+
+        Args:
+            filename (str): the file name.
+        """
         with open(filename, "w") as file:
             json.dump(json.loads(str(self._json)), file, indent=4)
 
     def get_python_report(self) -> dict:
+        """
+        Gets self._json in python dict format.
+
+        Returns:
+            dict: the report.
+        """
         return json.loads(str(self._json))
 
     def __str__(self):

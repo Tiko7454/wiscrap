@@ -5,6 +5,18 @@ from pageanalytics import PageAnalytics
 
 
 def make_full_analysis(url: str) -> tuple[dict, PageContent]:
+    """
+    Gets all analysis and also dumps into a json file.
+
+    Args:
+        url (str): The URL which the analysis must be performed on.
+
+    Returns:
+        tuple[dict, PageContent]: The report in dict and the page content which was analysed.
+
+    Side Effects:
+        Creates a file named by the headline with a json extension and dumps the report there.
+    """
     rp = RawPage(url)
     pc = PageContent(url)
     Extractor().extract_sentences(rp, pc)
