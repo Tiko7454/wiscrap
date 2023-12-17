@@ -1,7 +1,12 @@
 class PageContent:
-    def __init__(self):
+    def __init__(self, url: str):
+        self._url = url
         self._sentences = []
         self._words = []
+
+    @property
+    def url(self):
+        return self._url
 
     @property
     def sentences(self):

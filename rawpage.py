@@ -1,6 +1,6 @@
 import requests
 from typing import Optional
-from .urlerror import UrlError
+from urlerror import UrlError
 
 
 class RawPage:
