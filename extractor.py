@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from .rawpage import RawPage
-from .pagecontent import PageContent
+from rawpage import RawPage
+from pagecontent import PageContent
 
 
 class Extractor:
@@ -50,11 +50,11 @@ class Extractor:
         word = ""
         raw_data = " ".join(cls._extract_content(raw_page))
         for char in raw_data:
-            if char.isspace():
+            if char in (" ", ".", "/", "—"):
                 if word:
                     words.append(word.lower())
                     word = ""
-            if char.isalpha():
+            if char.isalpha() or char in ("-", "–"):
                 word += char
         if word:
             words.append(word.lower())
